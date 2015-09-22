@@ -1,6 +1,6 @@
 import Rx from 'rx';
 
-const getType = ({ type, clientX: x, clientY: y }) => ({ type, x, y });
+const getType = ({type, clientX: x, clientY: y}) => ({type, x, y});
 
 const mouseDownStream = Rx.Observable.fromEvent(window, 'mousedown');
 const mouseMoveStream = Rx.Observable.fromEvent(window, 'mousemove');

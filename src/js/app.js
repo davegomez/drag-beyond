@@ -1,3 +1,3 @@
 import "../scss/app.scss";
-import mouseStream from "./mouse-stream";
+import stream from "./mouse-stream";
 

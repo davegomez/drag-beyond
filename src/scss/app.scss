@@ -7,17 +7,15 @@ $button-shadow: rgba(51, 51, 51, .7);
 $main-font: 'HUGEAvantGardeBold';
 
 .draggable {
-  align-items: center;
   background-color: $button-color;
   border-radius: 4px;
   box-shadow: 1px 1px 2px 0 $button-shadow;
   display: flex;
-  height: 60px;
   justify-content: center;
   left: 100px;
   position: absolute;
   top: 100px;
-  width: 150px;
+  width: 180px;
 
   &:hover {
     box-shadow: 2px 2px 4px 0 fade-out($button-shadow, .2);
@@ -25,6 +23,9 @@ $main-font: 'HUGEAvantGardeBold';
 
   p {
     color: $font-color;
+    cursor: pointer;
     font-family: $main-font;
+    font-size: 20px;
+    user-select: none;
   }
 }
