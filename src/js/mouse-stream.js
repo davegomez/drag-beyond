@@ -12,4 +12,4 @@ const dragDropStream = Rx.Observable
   .merge(mouseDownStream, mouseMoveBetweenStream, mouseUpStream)
   .map(getType);
 
-export default dragDropStream.subscribe;
+export default dragDropStream.subscribe.bind(dragDropStream);
