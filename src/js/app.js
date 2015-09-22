@@ -1,6 +1,3 @@
-import "../scss/main.scss";
-import {greetings} from "./hello.js";
+import "../scss/app.scss";
+import mouseStream from "./mouse-stream";
 
-"use strict";
-
-console.log(greetings("Dave"));
