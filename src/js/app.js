@@ -1,5 +1,5 @@
-import "../scss/app.scss";
-import mouseEventsStream from "./mouse-stream";
+import '../scss/app.scss';
+import mouseEventsStream from './mouse-stream';
 
 const element = document.getElementById('draggable');
 
@@ -24,4 +24,26 @@ const subscribe = (pos) => {
   }
 };
 
-mouseEventsStream(subscribe);
+// Camilo Working here...
+// Check: https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/operators/reduce.md
+function accumulateEvents(acc, event) {
+  if (event.type === 'mousedown') {
+    console.log('Start moving...');
+    return {};
+  }
+
+  if (event.type === 'mousemove') {
+    acc.moving || (acc.moving = []);
+    acc.moving.push(event);
+    console.log('Mooooooving...', acc.moving);
+    return acc;
+  }
+
+  if (event.type === 'mouseup') {
+    console.log('Fun ends here my friends...');
+  }
+}
+
+mouseEventsStream
+  .reduce(accumulateEvents, {})
+  .subscribe();
