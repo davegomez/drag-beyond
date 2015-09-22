@@ -1,6 +1,6 @@
 # Drag Beyond
 
-Experimenting with RxJS and Socket.IO to move DOM elements between browser windows.
+Experimenting with [RxJS](https://github.com/Reactive-Extensions/RxJS) and [socket.io](http://socket.io/) to move DOM elements between browser windows.
 
 ## Authors
 - [David Gómez](https://github.com/davegomez)
