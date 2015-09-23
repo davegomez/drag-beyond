@@ -1,49 +1,36 @@
 import '../scss/app.scss';
-import mouseEventsStream from './mouse-stream';
+import { mouseMoveBetweenStream } from './mouse-stream';
 
-const element = document.getElementById('draggable');
+const elem = document.getElementById('draggable');
 
-const isTouching = (el, x = 0, y = 0) => {
-  const rect = el.getBoundingClientRect();
-  const matchH = x > rect.left && x < rect.left + rect.width;
-  const matchV = y > rect.top && y < rect.top + rect.height;
+const onHover = (bounds, x, y) => {
+  const matchH = x > bounds.left && x < bounds.left + bounds.width;
+  const matchV = y > bounds.top && y < bounds.top + bounds.height;
 
   return !!(matchH && matchV);
 };
 
-const moveElement = (el, x = 0, y = 0) => {
-  const rect = el.getBoundingClientRect();
-  el.style.top = `${y - rect.top / 2}.px`;
-  el.style.left = `${x - rect.left / 2}.px`;
+const move = (bounds, x, y) => {
+  const newX = Math.floor(bounds.width / 2);
+  const newY = Math.floor(bounds.height / 2);
+
+  elem.style.left = `${x - newX}.px`;
+  elem.style.top = `${y - newY}.px`;
+
+  bounds = elem.getBoundingClientRect();
+
+  return bounds;
 };
 
-const subscribe = (pos) => {
-  if (isTouching(element, pos.x, pos.y)) {
-    moveElement(element, pos.x, pos.y);
-    console.log('Is over!');
+const hugeDrag = event => {
+  const x = event.clientX;
+  const y = event.clientY;
+  let rect = elem.getBoundingClientRect();
+
+  if (onHover(rect, x, y)) {
+    move(rect, x, y);
   }
 };
 
-// Camilo Working here...
-// Check: https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/operators/reduce.md
-function accumulateEvents(acc, event) {
-  if (event.type === 'mousedown') {
-    console.log('Start moving...');
-    return {};
-  }
-
-  if (event.type === 'mousemove') {
-    acc.moving || (acc.moving = []);
-    acc.moving.push(event);
-    console.log('Mooooooving...', acc.moving);
-    return acc;
-  }
-
-  if (event.type === 'mouseup') {
-    console.log('Fun ends here my friends...');
-  }
-}
-
-mouseEventsStream
-  .reduce(accumulateEvents, {})
-  .subscribe();
+mouseMoveBetweenStream
+  .subscribe(hugeDrag);
