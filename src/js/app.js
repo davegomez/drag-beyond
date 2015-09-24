@@ -16,6 +16,7 @@ const move = (element, x, y) => {
 
 const hugeDrag = ([event, element]) => {
   const { clientX: x, clientY: y } = event;
+  console.log(`x: ${x}, y: ${y}`);
   move(element, x, y);
 };
 
