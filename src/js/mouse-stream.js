@@ -1,7 +1,18 @@
 import Rx from 'rx';
 
-const mouseDownStream = Rx.Observable.fromEvent(window, 'mousedown');
-const mouseMoveStream = Rx.Observable.fromEvent(window, 'mousemove');
-const mouseUpStream = Rx.Observable.fromEvent(window, 'mouseup');
+/**
+ *
+ * @param {HTMLElement} domEl Element to set for
+ * @returns {*}
+ */
+export const getMouseMoveObservable = function(domEl) {
+  const mouseDownStream = Rx.Observable.fromEvent(domEl, 'mousedown');
+  const mouseMoveStream = Rx.Observable.fromEvent(window, 'mousemove');
+  const mouseUpStream = Rx.Observable.fromEvent(window, 'mouseup');
 
-export const mouseMoveBetweenStream = mouseDownStream.flatMap(() => mouseMoveStream.takeUntil(mouseUpStream));
+  const mouseMoveBetweenStream = mouseDownStream
+    .flatMap(() => mouseMoveStream.takeUntil(mouseUpStream));
+
+  // Check http://rxmarbles.com/#combineLatest
+  return Rx.Observable.combineLatest(mouseMoveBetweenStream, Rx.Observable.just(domEl));
+};
