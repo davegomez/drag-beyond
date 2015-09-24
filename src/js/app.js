@@ -1,15 +1,7 @@
 import '../scss/app.scss';
 import { getMouseMoveObservable } from './mouse-stream';
 
-const draggableElement = document.getElementById('draggable');
-
-//const onHover = (bounds, x, y) => {
-//  const matchH = x > bounds.left && x < bounds.left + bounds.width;
-//  const matchV = y > bounds.top && y < bounds.top + bounds.height;
-//
-//  return !!(matchH && matchV);
-//};
-//
+const draggableElement = document.getElementById('h');
 
 const move = (element, x, y) => {
   const bounds = element.getBoundingClientRect();
