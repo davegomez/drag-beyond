@@ -1,5 +1,6 @@
 import '../scss/app.scss';
 import { getMouseMoveObservable } from './mouse-stream';
+import { register, generate } from './momentum';
 
 const draggableElement = document.getElementById('h');
 
@@ -16,7 +17,6 @@ const move = (element, x, y) => {
 
 const hugeDrag = ([event, element]) => {
   const { clientX: x, clientY: y } = event;
-  console.log(`x: ${x}, y: ${y}`);
   move(element, x, y);
 };
 

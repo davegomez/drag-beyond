@@ -15,21 +15,13 @@ export function register(event) {
   return registry;
 }
 
-export function generate() {
-  const events = {
-    clientX: [],
-    clientY: []
-  };
-
+export function generate(element, callback) {
   let s = velocity(registry.x);
   let x = registry.x[registry.x.length - 1];
   let y = registry.y[registry.y.length - 1];
 
   while (s >= 0) {
-    events.clientX.push(x = x + s);
-    events.clientY.push(y = y + s);
+    callback(element, x = x + s, y = y + s);
     s = s * 0.8
   }
-
-  return events;
 }
