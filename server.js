@@ -1,5 +1,6 @@
 // TODO: Set up Nodemon
 // TODO: Set up browsersync to watch js files
+// TODO: Set up basic socket.io example
 const express = require('express');
 const app = express();
 
