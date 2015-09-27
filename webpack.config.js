@@ -28,9 +28,11 @@ module.exports = {
       allChunks: true
     }),
     new BrowserSyncPlugin({
-      host: "localhost",
-      port: 3000,
-      server: {baseDir: ["./bin"]},
+      //host: "localhost",
+      //port: 3000,
+      proxy: {
+        target: "localhost:3006"
+      },
       files: ["bin/*.html"]
     })
   ]
